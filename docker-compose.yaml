@@ -20,6 +20,7 @@ services:
       - ./ssl/server.crt:/etc/nginx/server.crt
       - ./ssl/server.key:/etc/nginx/server.key
       - ./ssl/root.crt:/usr/local/share/ca-certificates/root.crt
+      - /Volumes/Tesla/projects/:/Volumes/Tesla/projects/
     command:
       - /usr/local/bin/supervisord
     restart: unless-stopped
@@ -32,6 +33,19 @@ services:
     image: mysql:8.0.32-debian
     volumes:
       - mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+    restart: unless-stopped
+    networks:
+      - mysql-network
+
+  mysql5:
+    container_name: mysql5
+    image: mysql:5.7.42-debian
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql5-data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: admin
     restart: unless-stopped
@@ -67,5 +81,7 @@ networks:
 volumes:
   mysql-data:
     name: mysql-data
+  mysql5-data:
+    name: mysql5-data
   cloudbeaver-data:
     name: cloudbeaver-data
