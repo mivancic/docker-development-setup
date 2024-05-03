@@ -15,6 +15,8 @@ RUN apt update && \
         vim \
         libfcgi \
         python3-pip \
+        openssh-client \
+        nodejs \
         curl && \
     add-apt-repository -y ppa:ondrej/php && \
     add-apt-repository -y ppa:ondrej/nginx && \

@@ -3,8 +3,9 @@ RUN apk add --no-cache \
         curl \
         libpng-dev \
         libzip-dev \
-        nodejs \
-        npm
+        npm \
+        php5-soap
+
 RUN curl -sSL https://github.com/mlocati/docker-php-extension-installer/releases/download/2.0.0/install-php-extensions -o - | sh -s \
     bcmath \
     curl \
@@ -34,11 +35,9 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
     php composer-setup.php --filename=composer2 --version=2.2.18 --install-dir=/usr/local/bin/ &&\
     php -r "unlink('composer-setup.php');"
 
-RUN apt-get install php5.6-soap
-
 RUN npm install -g uglify-js uglifycss
 RUN npm install -g grunt --save-dev
-RUN npm install -g grunt-cli --save-dev
+#RUN npm install -g grunt-cli --save-dev
 
 # run from inside of the docker inmage: sudo apt-get install php5.6-soap
 # run instide of the docker image: npm install -g uglify-js uglifycss

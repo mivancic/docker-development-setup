@@ -21,6 +21,7 @@ services:
       - ./ssl/server.key:/etc/nginx/server.key
       - ./ssl/root.crt:/usr/local/share/ca-certificates/root.crt
       - /Volumes/Tesla/projects/:/Volumes/Tesla/projects/
+      - ~/.ssh:/root/.ssh
     command:
       - /usr/local/bin/supervisord
     restart: unless-stopped
